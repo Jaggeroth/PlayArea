@@ -41,6 +41,7 @@ public class AppTestTwoController {
         hm.put("Location 3", new ArrayList<>(Arrays.asList(400.0, 276.0, "Location 3")));
         hm.put("Location 4", new ArrayList<>(Arrays.asList(326.0, 280.0, "Location 4")));
         hm.put("Location 5", new ArrayList<>(Arrays.asList(658.0, 118.0, "Location 5")));
+        hm.put("Location 6", new ArrayList<>(Arrays.asList(658.0, 118.0, "Location 6")));
 
         ObservableList<String> names = FXCollections.observableArrayList();
         Set<Entry<String, ArrayList<Comparable<?>>>> set = hm.entrySet();
