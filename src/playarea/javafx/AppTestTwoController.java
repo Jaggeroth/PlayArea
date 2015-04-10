@@ -1,15 +1,5 @@
 package playarea.javafx;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -19,6 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
@@ -29,49 +23,88 @@ public class AppTestTwoController {
     @FXML
     private ListView<String> map_listview;
     @FXML
+    private TableView<MapLocale> map_table;
+    @FXML
+    private TableColumn<MapLocale, Integer> idColumn;
+    @FXML
+    private TableColumn<MapLocale, String> nameColumn;
+    @FXML
     private ScrollPane map_scrollpane;
-
-    private final HashMap<String, ArrayList<Comparable<?>>> hm = new HashMap<>();
 
     @FXML
     void initialize() {
 
-        hm.put("Location 1", new ArrayList<>(Arrays.asList(424.0, 120.0, "Location 1")));
-        hm.put("Location 2", new ArrayList<>(Arrays.asList(466.0, 178.0, "Location 2")));
-        hm.put("Location 3", new ArrayList<>(Arrays.asList(400.0, 276.0, "Location 3")));
-        hm.put("Location 4", new ArrayList<>(Arrays.asList(326.0, 280.0, "Location 4")));
-        hm.put("Location 5", new ArrayList<>(Arrays.asList(658.0, 118.0, "Location 5")));
-        hm.put("Location 6", new ArrayList<>(Arrays.asList(595.0, 158.0, "Location 6")));
-        hm.put("Location 7", new ArrayList<>(Arrays.asList(615.0, 204.0, "Location 7")));
-        hm.put("Location 8", new ArrayList<>(Arrays.asList(810.0, 193.0, "Location 8")));
-        hm.put("Location 9", new ArrayList<>(Arrays.asList(747.0, 405.0, "Location 9")));
-        hm.put("Location 10", new ArrayList<>(Arrays.asList(587.0, 298.0, "Location 10")));
-
-        ObservableList<String> names = FXCollections.observableArrayList();
-        Set<Entry<String, ArrayList<Comparable<?>>>> set = hm.entrySet();
-        Iterator<Entry<String, ArrayList<Comparable<?>>>> i = set.iterator();
-        while (i.hasNext()) {
-            Map.Entry<String, ArrayList<Comparable<?>>> me = i.next();
-            names.add((String) me.getKey());
-        }
-        Collections.sort(names);
-
-        map_listview.setItems(names);
+        ObservableList<MapLocale> locations = FXCollections.observableArrayList(
+        		new MapLocale(1,"Location 1", 424, 120),
+        		new MapLocale(2,"Location 2", 466, 178),
+        		new MapLocale(3,"Location 3", 400, 276),
+        		new MapLocale(4,"Location 4", 326, 280),
+        		new MapLocale(5,"Location 5", 658, 118),
+        		new MapLocale(6,"Location 6", 595, 158),
+        		new MapLocale(7,"Location 7", 615, 204),
+        		new MapLocale(8,"Location 8", 810, 193),
+        		new MapLocale(9,"Location 9", 747, 405),
+        		new MapLocale(10,"Location 10", 587, 298)
+        		);
+        idColumn.setCellValueFactory(new PropertyValueFactory<MapLocale,Integer>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<MapLocale,String>("name"));
+        map_table.setItems(locations);
     }
 
     @FXML
     void listClicked(MouseEvent event) {
-        String item = map_listview.getSelectionModel().getSelectedItem();
-        List<Comparable<?>> list = hm.get(item);
         double mapWidth = 968;
         double mapHeight = 1248;
-        double scrollH = (Double) list.get(0) / mapWidth;
-        double scrollV = (Double) list.get(1) / mapHeight;
-        final Timeline timeline = new Timeline();
-        final KeyValue kv1 = new KeyValue(map_scrollpane.hvalueProperty(), scrollH);
-        final KeyValue kv2 = new KeyValue(map_scrollpane.vvalueProperty(), scrollV);
-        final KeyFrame kf = new KeyFrame(Duration.millis(500), kv1, kv2);
-        timeline.getKeyFrames().add(kf);
-        timeline.play();
+    	 TableViewSelectionModel<MapLocale> sm = map_table.getSelectionModel();
+    	 if (sm.getSelectedIndex()>=0) {
+    		 MapLocale loc = sm.getSelectedItem();
+    		 double scrollH = loc.getX() / mapWidth;
+    		 double scrollV = loc.getY() / mapHeight;
+    		 final Timeline timeline = new Timeline();
+    		 final KeyValue kv1 = new KeyValue(map_scrollpane.hvalueProperty(), scrollH);
+    		 final KeyValue kv2 = new KeyValue(map_scrollpane.vvalueProperty(), scrollV);
+    		 final KeyFrame kf = new KeyFrame(Duration.millis(500), kv1, kv2);
+    		 timeline.getKeyFrames().add(kf);
+    		 timeline.play();
+    	 }
+    }
+    
+    public class MapLocale {
+    	private int id;
+    	private String name;
+    	private int x;
+    	private int y;
+    	
+		public MapLocale(int id, String name, int x, int y) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.x = x;
+			this.y = y;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getX() {
+			return x;
+		}
+		public void setX(int x) {
+			this.x = x;
+		}
+		public int getY() {
+			return y;
+		}
+		public void setY(int y) {
+			this.y = y;
+		}
     }
 }
