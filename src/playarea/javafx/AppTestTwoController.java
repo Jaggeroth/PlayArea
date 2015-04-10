@@ -2,13 +2,8 @@ package playarea.javafx;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -19,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
@@ -28,6 +25,12 @@ public class AppTestTwoController {
 	private MenuButton fallcrest1;
     @FXML
     private ListView<String> map_listview;
+    @FXML
+    private TableView<MapLocale> map_table;
+    @FXML
+    private TableColumn<MapLocale, Integer> idColumn;
+    @FXML
+    private TableColumn<MapLocale, String> nameColumn;
     @FXML
     private ScrollPane map_scrollpane;
 
@@ -47,7 +50,14 @@ public class AppTestTwoController {
         hm.put("Location 9", new ArrayList<>(Arrays.asList(747.0, 405.0, "Location 9")));
         hm.put("Location 10", new ArrayList<>(Arrays.asList(587.0, 298.0, "Location 10")));
 
-        ObservableList<String> names = FXCollections.observableArrayList();
+        
+        ObservableList<MapLocale> locations = FXCollections.observableArrayList();
+        locations.add(new MapLocale(1,"Fred"));
+        locations.add(new MapLocale(2,"Bert"));
+        map_table.setItems(locations);
+        map_table.getColumns().addAll(idColumn, nameColumn);
+        
+        /**
         Set<Entry<String, ArrayList<Comparable<?>>>> set = hm.entrySet();
         Iterator<Entry<String, ArrayList<Comparable<?>>>> i = set.iterator();
         while (i.hasNext()) {
@@ -57,6 +67,7 @@ public class AppTestTwoController {
         Collections.sort(names);
 
         map_listview.setItems(names);
+        **/
     }
 
     @FXML
@@ -73,5 +84,27 @@ public class AppTestTwoController {
         final KeyFrame kf = new KeyFrame(Duration.millis(500), kv1, kv2);
         timeline.getKeyFrames().add(kf);
         timeline.play();
+    }
+    
+    public class MapLocale {
+    	private int id;
+    	private String name;
+    	
+    	public MapLocale(int id, String name) {
+    		this.id = id;
+    		this.name = name;
+    	}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
     }
 }

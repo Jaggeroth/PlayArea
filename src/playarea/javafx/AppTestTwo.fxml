@@ -8,7 +8,11 @@
 
 <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playarea.javafx.AppTestTwoController">
    <items>
-      <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="200.0" prefWidth="200.0" />
+      <TableView fx:id="map_table" onMouseClicked="#listClicked">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="57.0" resizable="false" text="Locale" />
+            <TableColumn fx:id="nameColumn" prefWidth="239.0" resizable="false" text="Name" />
+         </columns></TableView>
       <ScrollPane fx:id="map_scrollpane" prefHeight="200.0" prefWidth="200.0">
          <content>
             <Pane>
