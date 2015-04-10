@@ -47,7 +47,26 @@ public class AppTestTwoController {
         		new MapLocale(7,"Half Moon Trading House", 615, 204),
         		new MapLocale(8,"Moonstone Keep", 810, 193),
         		new MapLocale(9,"Tombwood", 747, 405),
-        		new MapLocale(10,"House of the Sun", 587, 298)
+        		new MapLocale(10,"House of the Sun", 587, 298),
+        		new MapLocale(11,"House Azaer", 511, 310),
+        		new MapLocale(12,"The Nentir Falls", 302, 435),
+        		new MapLocale(13,"Temple of Erathis", 561, 404),
+        		new MapLocale(14,"The Bluffs", 511, 527),
+        		new MapLocale(15,"The Catacombs", 645, 558),
+        		new MapLocale(16,"Moonsong Temple", 702, 593),
+        		new MapLocale(17,"Fallcrest Stables", 800, 549),
+        		new MapLocale(18,"Wizard's Gate", 900, 602),
+        		new MapLocale(19,"Naerumar's Imports", 855, 687),
+        		new MapLocale(20,"Kamroth Estate", 760, 763),
+        		new MapLocale(21,"Moonwash Falls", 679, 749),
+        		new MapLocale(22,"Septarch's Tower", 683, 846),
+        		new MapLocale(23,"Blue Moon Alehouse", 559, 860),
+        		new MapLocale(24,"Teldorthan's Arms", 448, 934),
+        		new MapLocale(25,"King's Gate", 564, 1003),
+        		new MapLocale(26,"The Markey Green", 431, 673),
+        		new MapLocale(27,"Sandercot Provisioners", 467, 618),
+        		new MapLocale(28,"Lucky Gnome Taphouse", 419, 703),
+        		new MapLocale(29,"Lower Quays", 286, 707)
         		);
         idColumn.setCellValueFactory(new PropertyValueFactory<MapLocale,Integer>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<MapLocale,String>("name"));
