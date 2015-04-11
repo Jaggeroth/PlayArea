@@ -83,7 +83,7 @@ public class AppTestTwoController {
     		 MapLocale loc = sm.getSelectedItem();
     		 double scrollH = loc.getX() / mapWidth;
     		 double scrollV = loc.getY() / mapHeight;
-    		 location_detail.setText(loc.getName());
+    		 location_detail.setText(loc.getDescription());
     		 final Timeline timeline = new Timeline();
     		 final KeyValue kv1 = new KeyValue(map_scrollpane.hvalueProperty(), scrollH);
     		 final KeyValue kv2 = new KeyValue(map_scrollpane.vvalueProperty(), scrollV);
