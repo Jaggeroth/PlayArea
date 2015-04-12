@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.web.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -10,18 +13,14 @@
 
 <SplitPane dividerPositions="0.39464882943143814" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="playarea.javafx.AppTestTwoController">
    <items>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="428.0" prefWidth="296.0">
+      <SplitPane dividerPositions="0.7050691244239631" orientation="VERTICAL" prefHeight="428.0" prefWidth="296.0">
          <items>
-      <TableView fx:id="map_table" onMouseClicked="#listClicked" prefHeight="408.0" prefWidth="307.0">
+      <TableView fx:id="map_table" onMouseClicked="#listClicked" prefHeight="290.0" prefWidth="233.0">
          <columns>
             <TableColumn fx:id="idColumn" prefWidth="57.0" resizable="false" text="Locale" />
             <TableColumn fx:id="nameColumn" prefWidth="176.0" resizable="false" text="Name" />
          </columns></TableView>
-            <Label fx:id="location_detail" alignment="TOP_LEFT" contentDisplay="TEXT_ONLY" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="313.0" text="Fallcrest" wrapText="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <WebView fx:id="location_detail" prefHeight="200.0" prefWidth="200.0" style="-fx-font-family: Segoe UI;" />
          </items>
       </SplitPane>
       <ScrollPane fx:id="map_scrollpane" prefHeight="200.0" prefWidth="200.0">
@@ -33,6 +32,7 @@
                         <Image url="@../images/fallcrest.jpg" />
                      </image>
                   </ImageView>
+                  <Circle fx:id="location_highlight" fill="#eb090900" layoutX="158.0" layoutY="234.0" radius="10.0" stroke="RED" strokeType="INSIDE" strokeWidth="3.0" visible="false" />
                </children>
             </Pane>
          </content>

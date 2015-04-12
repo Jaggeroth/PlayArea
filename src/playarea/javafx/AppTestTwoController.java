@@ -6,7 +6,6 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
@@ -15,9 +14,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 public class AppTestTwoController {
+	
+	private final String HTML_CONTENT = "<html><body><h4>%s</h4><p>%s</p></body></html>";
 	
 	@FXML 
 	private MenuButton fallcrest1;
@@ -32,35 +35,37 @@ public class AppTestTwoController {
     @FXML
     private ScrollPane map_scrollpane;
     @FXML
-    private Label location_detail; 
+    private WebView location_detail; 
+    @FXML
+    private Circle location_highlight;
 
     @FXML
     void initialize() {
     	
         ObservableList<MapLocale> locations = FXCollections.observableArrayList(
-        		new MapLocale(1,"Tower of Waiting", 424, 120,"Tower of Waiting description"),
+        		new MapLocale(1,"Tower of Waiting", 425, 121,"Tower of Waiting description"),
         		new MapLocale(2,"Upper Quays", 466, 178,"Upper Quays description"),
         		new MapLocale(3,"Five-Arched Bridge", 400, 276,"Five-Arched Bridge description"),
         		new MapLocale(4,"Nentir Inn", 326, 280,"Nentir Inn description"),
         		new MapLocale(5,"Knight's Gate", 658, 118,"Knight's Gate description"),
-        		new MapLocale(6,"Silver Unicorn Inn", 595, 158,"Silver Unicorn Inn description"),
+        		new MapLocale(6,"Silver Unicorn Inn", 596, 159,"Silver Unicorn Inn description"),
         		new MapLocale(7,"Half Moon Trading House", 615, 204,"Half Moon Trading House description"),
         		new MapLocale(8,"Moonstone Keep", 810, 193,"Moonstone Keep description"),
         		new MapLocale(9,"Tombwood", 747, 405,"Tombwood description"),
-        		new MapLocale(10,"House of the Sun", 587, 298,"House of the Sun description"),
+        		new MapLocale(10,"House of the Sun", 587, 299,"House of the Sun description"),
         		new MapLocale(11,"House Azaer", 511, 310,"House Azaer description"),
         		new MapLocale(12,"The Nentir Falls", 302, 435,"The Nentir Falls description"),
         		new MapLocale(13,"Temple of Erathis", 561, 404,"Temple of Erathis description"),
         		new MapLocale(14,"The Bluffs", 511, 527,""),
         		new MapLocale(15,"The Catacombs", 645, 558,""),
-        		new MapLocale(16,"Moonsong Temple", 702, 593,""),
+        		new MapLocale(16,"Moonsong Temple", 702, 594,""),
         		new MapLocale(17,"Fallcrest Stables", 800, 549,""),
         		new MapLocale(18,"Wizard's Gate", 900, 602,""),
-        		new MapLocale(19,"Naerumar's Imports", 855, 687,""),
+        		new MapLocale(19,"Naerumar's Imports", 857, 689,""),
         		new MapLocale(20,"Kamroth Estate", 760, 763,""),
-        		new MapLocale(21,"Moonwash Falls", 679, 749,""),
+        		new MapLocale(21,"Moonwash Falls", 681, 749,""),
         		new MapLocale(22,"Septarch's Tower", 683, 846,""),
-        		new MapLocale(23,"Blue Moon Alehouse", 559, 860,""),
+        		new MapLocale(23,"Blue Moon Alehouse", 559, 862,""),
         		new MapLocale(24,"Teldorthan's Arms", 448, 934,""),
         		new MapLocale(25,"King's Gate", 564, 1003,""),
         		new MapLocale(26,"The Markey Green", 431, 673,""),
@@ -83,7 +88,10 @@ public class AppTestTwoController {
     		 MapLocale loc = sm.getSelectedItem();
     		 double scrollH = loc.getX() / mapWidth;
     		 double scrollV = loc.getY() / mapHeight;
-    		 location_detail.setText(loc.getDescription());
+    		 location_detail.getEngine().loadContent(loc.getHTML());
+    		 location_highlight.setVisible(true);
+    		 location_highlight.setLayoutX(loc.getX());
+    		 location_highlight.setLayoutY(loc.getY());
     		 final Timeline timeline = new Timeline();
     		 final KeyValue kv1 = new KeyValue(map_scrollpane.hvalueProperty(), scrollH);
     		 final KeyValue kv2 = new KeyValue(map_scrollpane.vvalueProperty(), scrollV);
@@ -137,6 +145,9 @@ public class AppTestTwoController {
 		}
 		public void setDescription(String description) {
 			this.description = description;
+		}
+		public String getHTML() {
+			return String.format(HTML_CONTENT, name, description);
 		}
     }
 }
