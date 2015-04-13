@@ -20,7 +20,7 @@ import javafx.util.Duration;
 
 public class AppTestTwoController {
 	
-	private final String HTML_CONTENT = "<html><body><h4>%s</h4><p>%s</p></body></html>";
+	private final String HTML_CONTENT = "<html><head><style type=\"text/css\">body { font-family: arial; }</style></head><body><h4>%s</h4><p>%s</p></body></html>";
 	
 	@FXML 
 	private MenuButton fallcrest1;
