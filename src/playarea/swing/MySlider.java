@@ -30,7 +30,6 @@ public class MySlider {
 					double v3 = Math.toDegrees(Math.atan(v1/v2));
 					if (facing>90 || facing<-90)
 						v3=180+v3;
-					System.out.println("In="+facing+" Out="+Math.floor(v3));
 					facing = Math.floor(v3);
 				}
 

@@ -26,7 +26,9 @@ public class MyPolygon extends JComponent {
 		scale.scale(newHeight,newHeight/2);
 		//scale.translate(200, 200);
 		Shape diamond = scale.createTransformedShape(shape);
-		System.out.println(diamond.getBounds().x+ " "+diamond.getBounds().y);
+		AffineTransform move = new AffineTransform();
+		move.translate(200, 300);
+		diamond=move.createTransformedShape(diamond);
 		g2.draw(diamond);
 		g2.drawRect(100, 100, 200, 100);
 		g2.drawRect(100, 250, 200, 100);
