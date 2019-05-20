@@ -49,7 +49,7 @@ public class MergeFiles {
     FileOutputStream fileOut;
     try {
       fileOut = new FileOutputStream(file);
-      newProp.store(fileOut, "Merge Jappy with Nerps");
+      newProp.store(fileOut, "Merge Jappy commit 945221e with Nerps");
       fileOut.close();
     } catch (FileNotFoundException e) {
       e.printStackTrace();
