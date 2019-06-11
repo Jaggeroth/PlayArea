@@ -16,9 +16,11 @@ public class Account {
   public static final String LINE_4 = "INSERT INTO cohauth.dbo.user_server_group (uid, server_group_id) VALUES (%s, 1);";
 
   public static void main(String[] args) {
-    String username = "Jagged";
-    String password = "Jagg3d";
+    String username = "test";
+    String password = "password";
     Account account = new Account();
+    String uid = String.valueOf(account.getAlder32(username));
+    System.out.println(uid);
     account.generateSQL(username, password);
   }
   
@@ -44,12 +46,14 @@ public class Account {
   
   private String generate(String authName, String password) {
     String n = authName.toLowerCase();
-    String n1 =  Integer.toHexString(Math.toIntExact(getAlder32(n)));
-    String n2 = String.format("%0"+ (8 - n1.length() )+"d%s  ",0 ,n1);
-    String r1 = n2.substring(6, 8);
-    String r2 = n2.substring(4, 6);
-    String r3 = n2.substring(2, 4);
-    String r4 = n2.substring(0, 2);
+    int nlong = Math.toIntExact(getAlder32(n));
+    String n1 =  Integer.toHexString(nlong);
+    if (n1.length() < 8)
+    	n1 = String.format("%0"+ (8 - n1.length() )+"d%s  ",0 ,n1);
+    String r1 = n1.substring(6, 8);
+    String r2 = n1.substring(4, 6);
+    String r3 = n1.substring(2, 4);
+    String r4 = n1.substring(0, 2);
     String r5 = password+r1+r2+r3+r4;
     return getSHA512(r5);
   }
